@@ -14,9 +14,15 @@ const NavbarContent = styled.div`
   width: min(1200px, 90%);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   flex-wrap: nowrap;
   margin: 0 auto;
+  @media (max-width: 720px) {
+
+    flex-wrap:wrap;
+    width: 100%;
+
+  }    
 `;
 
 const NavbarMenu = styled.nav`
@@ -35,67 +41,88 @@ width:20%;
 background-color:#000000;
 color: white; */
 const NavButton = styled.button`
+margin: 0 5px;
 
 position:relative;
 display:block;
-height:77px;
-width: 15%;
+
 border-radius: 0px;
 text-transform:uppercase;
 background-color:transparent;
 color:white;
-font-size:18px;
-overflow:hidden;
+font-size:14px;
+text-align:center;
+
 transition: all 500ms ease;
-border: 2px solid #f7ca4c;
 
 z-index: 0;
 font-weight: 700;
 
-&::before{
+&::after{
   content:'';
-  position: absolute;
-  left:0;
-  right:0;
-  top:0;
-  margin:auto;
+  display: block;
+  position:absolute;
   background-color:#f7ca4c;
-  transition: all 500ms ease;
+  transition: all 700ms ease;
   z-index: -1;
+  bottom:-1rem;
+  
 }
 
-&::before{
+&::after{
+  
   width: 0;
-  heigth: 100%
+  height:2px;
 }
 
  &:hover{
-  background-color:#f7ca4c;
 
-  &::before{
+  &::after{
     width:100%;
   }
 
-  
 } 
+
+@media (max-width: 720px) {
+  padding: 0 1rem;
+}
 
 `;
 
 const NavMid = styled.div`
 width:70%;
 height:100%;
+display: flex;
+flex-wrap:no wrap;
 align-items: center;
 background-color:#000000;
 color: white;
+
+@media (max-width: 720px) {
+
+  margin-bottom:10px;
+  order:3;
+  width: 100%;
+  
+  &:hover div {
+      border: 2px solid #c8a936;
+      max-height: 100px;
+      border-radius: 4px;     
+      
+  }
+  
+}
 `;
 
 const NavRight = styled.div`
-width:15%;
+display: flex;
+align-items: center;
+width: 20%;
+height: 50px;
 `;
 
 const NavLeft = styled.div`
-padding: 0 0 5px 0;
-margin: 0 0 5px 0;
+
 `;
 
 const NavIcon = styled.div`
@@ -111,15 +138,15 @@ const Navbar = () => {
     <NavbarBackground>
       <NavbarContent>
         <NavLeft>
-          <Image src={"/slon-logo.svg"} width={"40"} height={"40"} />
+          <Image src={"/slon-logo.svg"} width={"60"} height={"60"} />
         </NavLeft>
 
         <NavMid>
           <NavbarMenu>
-            <NavButton><p>Blusas</p></NavButton>
-            <NavButton><p>Blazers</p></NavButton>
-            <NavButton><p>Jeans</p></NavButton>
-            <NavButton><p>Lenceria</p></NavButton>
+            <NavButton>Blusas</NavButton>
+            <NavButton>Blazers</NavButton>
+            <NavButton>Jeans</NavButton>
+            <NavButton>Lenceria</NavButton>
           </NavbarMenu>
         </NavMid>
 
