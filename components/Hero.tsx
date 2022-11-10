@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import heroImg from "../public/hero-img.jpg";
 
@@ -35,6 +35,20 @@ const HeroTitle = styled.h1`
 
 const Hero = () => {
   const [show, setShow] = useState(false);
+  const titleRef = useRef<HTMLElement>(null);
+
+  const handleScroll = () => {
+    if (titleRef.current!.getBoundingClientRect().top < 100) {
+      console.log("change color");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => handleScroll());
+
+    return () => window.removeEventListener("scroll", () => handleScroll());
+  }, []);
+
   return (
     <HeroContainer>
       <Image
@@ -45,7 +59,9 @@ const Hero = () => {
         onLoadingComplete={() => setShow(true)}
       />
 
-      <HeroTitle className={show ? "" : "hide"}>SLON STORE</HeroTitle>
+      <HeroTitle ref={titleRef} className={show ? "" : "hide"}>
+        SLON STORE
+      </HeroTitle>
     </HeroContainer>
   );
 };
